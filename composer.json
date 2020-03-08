@@ -1,0 +1,37 @@
+{
+    "name": "dimaslanjaka/youtube-search",
+    "description": "PHP Curl Class child extends for searching youtube videos.",
+    "homepage": "https://github.com/dimaslanjaka/youtube-search",
+    "license": "Unlicense",
+    "keywords": [
+        "php", "curl", "class", "api", "api-client", "client", "framework", "http", "http-client", "http-proxy", "json",
+        "php-curl", "php-curl-library", "proxy", "requests", "restful", "web-scraper", "web-scraping", "web-service",
+        "xml", "youtube-search"
+    ],
+    "authors": [
+        {
+            "name": "Dimas Lanjaka",
+            "email": "dimaslanjaka@gmail.com",
+            "homepage": "https://web-manajemen.blogspot.com",
+            "role": "Full Stack Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "ext-curl": "*",
+        "php-curl-class/php-curl-class": "^8.6"
+    },
+    "require-dev": {
+        "ext-gd": "*",
+        "phpunit/phpunit": "*",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "suggest": {
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Curl\\": "src/Curl/"
+        }
+    }
+}
