@@ -29,6 +29,11 @@ class YTSearch extends Curl
     $this->setKey($this->apikey);
   }
 
+  /**
+   * Get non-static function from static method
+   *
+   * @return $this
+   */
   public static function getInstance()
   {
     if (null === self::$_instance) {
@@ -70,7 +75,10 @@ class YTSearch extends Curl
       Helper::fwrite($cfg_detail, json_encode((object) $this->response_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     } else {
       $result = Helper::fget($cfg_detail);
-      $this->response_data = json_decode($result);
+      $data_result = json_decode($result, true);
+      $data_result['_'] = 'Add query parameter `q` for searching';
+      ksort_recursive($data_result);
+      $this->response_data = $data_result;
     }
 
     return (object) $this->response_data;
@@ -134,9 +142,11 @@ class YTSearch extends Curl
    */
   public static function key($str)
   {
-    self::setKey($str);
+    $self = self::getInstance();
+    //self::setKey($str);
+    $self->setKey($str);
 
-    return self::getInstance();
+    return $self;
   }
 
   public function setKeyword($str)
@@ -153,5 +163,21 @@ class YTSearch extends Curl
     }
 
     return $this;
+  }
+}
+
+/**
+ * Reorder array alphabet recursive
+ *
+ * @param array $array
+ * @return array
+ */
+function ksort_recursive(&$array)
+{
+  ksort($array);
+  foreach ($array as &$value) {
+    if (is_array($value)) {
+      ksort_recursive($value);
+    }
   }
 }
